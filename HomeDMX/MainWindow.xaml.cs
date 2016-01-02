@@ -4,6 +4,7 @@ using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Linq;
+using HomeDMX.Controller;
 
 namespace HomeDMX
 {
@@ -23,16 +24,20 @@ namespace HomeDMX
         {
             InitializeComponent();
 
-            sampleAggregator.FftCalculated += new EventHandler<FftEventArgs>(FftCalculated);
-            sampleAggregator.PerformFft = true;
+            var controller = new UDMXController();
+            var isConnected = controller.IsConnected;
 
-            // Here you decide what you want to use as the waveIn.
-            // There are many options in NAudio and you can use other streams/files.
-            // Note that the code varies for each different source.
-            waveIn = new WasapiLoopbackCapture();
-            var waveFormat = waveIn.WaveFormat;
-            waveIn.DataAvailable += OnDataAvailable;
-            waveIn.StartRecording();
+
+            //sampleAggregator.FftCalculated += new EventHandler<FftEventArgs>(FftCalculated);
+            //sampleAggregator.PerformFft = true;
+
+            //// Here you decide what you want to use as the waveIn.
+            //// There are many options in NAudio and you can use other streams/files.
+            //// Note that the code varies for each different source.
+            //waveIn = new WasapiLoopbackCapture();
+            //var waveFormat = waveIn.WaveFormat;
+            //waveIn.DataAvailable += OnDataAvailable;
+            //waveIn.StartRecording();
 
         }
 
