@@ -5,6 +5,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Linq;
 using HomeDMX.Controller;
+using HomeDMX.ViewModels;
 
 namespace HomeDMX
 {
@@ -19,15 +20,27 @@ namespace HomeDMX
         // There might be a sample aggregator in NAudio somewhere but I made a variation for my needs
         private SampleAggregator sampleAggregator = new SampleAggregator(fftLength);
 
-
+        IDmxController controller;
         public MainWindow()
         {
             InitializeComponent();
 
-            var controller = new UDMXController();
+            controller = new UDmxController();
             var isConnected = controller.IsConnected;
+            controller.Reset();
+
+            var controlSetViewModel = new ControlSetViewModel();
+
+            controlSetViewModel.DmxControllers.Add(new DmxViewModel(controller, 1));
+            controlSetViewModel.DmxControllers.Add(new DmxViewModel(controller, 2));
+            controlSetViewModel.DmxControllers.Add(new DmxViewModel(controller, 3));
+            controlSetViewModel.DmxControllers.Add(new DmxViewModel(controller, 4));
+            controlSetViewModel.DmxControllers.Add(new DmxViewModel(controller, 5));
+
+            DataContext = controlSetViewModel;
 
 
+            Closed += MainWindow_Closed;
             //sampleAggregator.FftCalculated += new EventHandler<FftEventArgs>(FftCalculated);
             //sampleAggregator.PerformFft = true;
 
@@ -39,6 +52,11 @@ namespace HomeDMX
             //waveIn.DataAvailable += OnDataAvailable;
             //waveIn.StartRecording();
 
+        }
+
+        private void MainWindow_Closed(object sender, EventArgs e)
+        {
+            controller.Reset();
         }
 
         private int counter;
@@ -57,17 +75,7 @@ namespace HomeDMX
             if (beat)
                 counter++;
 
-            TbCounter.Text = String.Format("{0} beats", counter);
-            return;
-            var bitmap = new WriteableBitmap(512, 200, 300, 300, PixelFormats.Bgr32, null);
-            for (int i = 0; i < 512; i++)
-            {
-                var c = e.Result[i / 8];
-                var complex = Math.Sqrt(c.X * c.X + c.Y * c.Y) * 10000;
-                complex = 10 * Math.Log10(complex);
-                ErasePixel(bitmap, i, -(int)(complex) + 200, 200);
-            }
-            Image1.Source = bitmap;
+            //TbCounter.Text = String.Format("{0} beats", counter);
         }
         static void ErasePixel(WriteableBitmap writeableBitmap, int x, int y, byte red)
         {

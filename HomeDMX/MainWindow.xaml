@@ -7,7 +7,12 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525" >
     <Grid>
-        <TextBlock x:Name="TbCounter" Text="Counter" />
-        <Image x:Name="Image1" />
+        <StackPanel Orientation="Horizontal">
+            <Slider Maximum="255" SmallChange="2" LargeChange="10" Margin="12,0" Value="{Binding DmxControllers[0].Value}" Orientation="Vertical"/>
+            <Slider Maximum="255" SmallChange="2" LargeChange="10" Margin="12,0" Value="{Binding DmxControllers[1].Value}" Orientation="Vertical"/>
+            <Slider Maximum="255" SmallChange="2" LargeChange="10" Margin="12,0" Value="{Binding DmxControllers[2].Value}" Orientation="Vertical"/>
+            <Slider Maximum="255" SmallChange="2" LargeChange="10" Margin="12,0" Value="{Binding DmxControllers[3].Value}" Orientation="Vertical"/>
+            <Slider Maximum="255" SmallChange="2" LargeChange="10" Margin="12,0" Value="{Binding DmxControllers[4].Value}" Orientation="Vertical"/>
+        </StackPanel>
     </Grid>
 </Window>

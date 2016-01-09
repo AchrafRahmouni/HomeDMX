@@ -64,7 +64,11 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="FftEventArgs.cs" />
+    <Compile Include="Properties\Annotations.cs" />
     <Compile Include="SampleAggregator.cs" />
+    <Compile Include="ViewModels\BaseViewModel.cs" />
+    <Compile Include="ViewModels\ControlSetViewModel.cs" />
+    <Compile Include="ViewModels\SliderViewModel.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -73,8 +77,8 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Controller\IDMXController.cs" />
-    <Compile Include="Controller\UDMXController.cs" />
+    <Compile Include="Controller\IDmxController.cs" />
+    <Compile Include="Controller\UDmxController.cs" />
     <Compile Include="Controller\FormsDMXController.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>

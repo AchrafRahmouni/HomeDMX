@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace HomeDMX.Controller
 {
-    public class UDMXController : IDMXController
+    public class UDmxController : IDmxController
     {
         private const int MaxChannels = 512;
         private readonly byte[] _channels = new byte[MaxChannels];
@@ -44,7 +44,7 @@ namespace HomeDMX.Controller
 
         #endregion
 
-        public UDMXController()
+        public UDmxController()
         {
         }
 
@@ -66,7 +66,9 @@ namespace HomeDMX.Controller
         {
             if (channel < 0 || channel > MaxChannels)
                 return;
-            if (ChannelSet(Convert.ToUInt32(channel), Convert.ToUInt32(value)))
+            var uChannel = Convert.ToUInt32(channel);
+            var uValue = Convert.ToUInt32(value);
+            if (ChannelSet(uChannel, uValue))
             {
                 _channels[channel] = value;
             }

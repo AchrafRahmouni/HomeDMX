@@ -2,7 +2,7 @@
 
 namespace HomeDMX.Controller
 {
-    public interface IDMXController
+    public interface IDmxController
     {
         byte this[int channel] { get; set; }
         bool IsConnected { get; }

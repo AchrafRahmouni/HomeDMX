@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 namespace HomeDMX.Controller
 {
-    class FormsDMXController : IDMXController
+    class FormsDmxController : IDmxController
     {
         public byte this[int channel]
         {

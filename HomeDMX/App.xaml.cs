@@ -13,5 +13,6 @@ namespace HomeDMX
     /// </summary>
     public partial class App : Application
     {
+        
     }
 }
